@@ -1,0 +1,746 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Maati Bistro | माटी — Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Noto+Serif+Devanagari:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --terra: #6B2D0E;
+    --terra-deep: #3D1607;
+    --terra-mid: #8B3A14;
+    --gold: #C8922A;
+    --gold-light: #E8B84B;
+    --gold-pale: #F5E0A0;
+    --parchment: #F2E8D0;
+    --parchment-dark: #E8D4A8;
+    --ink: #1A0A00;
+    --ink-soft: #3D2010;
+    --cream: #FAF5E8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--terra-deep);
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .hero {
+    min-height: 100svh;
+    background: linear-gradient(160deg, #3D1607 0%, #6B2D0E 40%, #8B3A14 70%, #4A1B07 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 60% 40% at 50% 30%, rgba(200,146,42,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(200,146,42,0.06) 0%, transparent 60%);
+  }
+
+  .hero-border {
+    position: absolute;
+    inset: 16px;
+    border: 1px solid rgba(200,146,42,0.35);
+    pointer-events: none;
+  }
+  .hero-border::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 0.5px solid rgba(200,146,42,0.18);
+  }
+
+  .corner { position: absolute; width: 48px; height: 48px; }
+  .corner svg { width: 100%; height: 100%; }
+  .corner.tl { top: 22px; left: 22px; }
+  .corner.tr { top: 22px; right: 22px; transform: scaleX(-1); }
+  .corner.bl { bottom: 22px; left: 22px; transform: scaleY(-1); }
+  .corner.br { bottom: 22px; right: 22px; transform: scale(-1); }
+
+  .hero-mandala {
+    width: min(160px, 40vw);
+    height: min(160px, 40vw);
+    margin-bottom: 1.5rem;
+    opacity: 0.92;
+    animation: slowspin 40s linear infinite;
+  }
+  @keyframes slowspin { to { transform: rotate(360deg); } }
+
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(3rem, 12vw, 5.5rem);
+    font-weight: 600;
+    color: var(--gold-light);
+    letter-spacing: 0.12em;
+    text-shadow: 0 0 40px rgba(200,146,42,0.4);
+    line-height: 1;
+    margin-bottom: 0.2em;
+    position: relative;
+    z-index: 10;
+  }
+
+  .hero-devanagari {
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    color: var(--gold-pale);
+    opacity: 0.85;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5em;
+    position: relative;
+    z-index: 10;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 0.8rem 0 1.2rem;
+    width: min(280px, 70vw);
+    position: relative;
+    z-index: 10;
+  }
+  .hero-divider::before, .hero-divider::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .hero-divider span {
+    color: var(--gold);
+    font-size: 1.1rem;
+  }
+
+  .hero-tagline {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    font-style: italic;
+    color: var(--gold-pale);
+    opacity: 0.8;
+    letter-spacing: 0.06em;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 10;
+  }
+  .hero-pill {
+    padding: 0.3em 1em;
+    border: 0.5px solid rgba(200,146,42,0.5);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-pale);
+    opacity: 0.75;
+  }
+
+  .view-menu-btn {
+    padding: 0.7em 2.2em; 
+    border: 1px solid rgba(200,146,42,0.6); 
+    font-family: 'Cinzel', serif; 
+    font-size: 0.7rem; 
+    letter-spacing: 0.2em; 
+    color: var(--gold-pale); 
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.3s;
+    position: relative;
+    z-index: 10;
+    text-decoration: none;
+  }
+
+  .view-menu-btn:hover {
+    background: rgba(200,146,42,0.2);
+  }
+
+  .scroll-cta {
+    position: absolute;
+    bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gold-pale);
+    opacity: 0.6;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: bobble 2.5s ease-in-out infinite;
+    cursor: pointer;
+    z-index: 10;
+  }
+  @keyframes bobble {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+  .scroll-cta svg { width: 18px; height: 18px; }
+
+  .menu-wrap {
+    background: var(--cream);
+    position: relative;
+  }
+
+  .menu-wrap::before {
+    content: '';
+    display: block;
+    height: 8px;
+    background: linear-gradient(90deg, var(--terra-deep), var(--gold), var(--terra-mid), var(--gold-light), var(--terra-deep));
+  }
+
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(242,232,208,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(107,45,14,0.15);
+    padding: 0 1rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch; /* smooth scrolling for mobile */
+  }
+  .sticky-nav::-webkit-scrollbar { display: none; }
+  .nav-inner {
+    display: flex;
+    gap: 0;
+    min-width: max-content;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .nav-btn {
+    padding: 0.85rem 1.1rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--terra);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    color: var(--terra-deep);
+    border-bottom-color: var(--gold);
+  }
+
+  .menu-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 1rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .section-ornament {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 0.6rem;
+    color: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    font-weight: 500;
+    color: var(--terra-deep);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+  }
+  .section-rule::before, .section-rule::after {
+    content: '';
+    width: 60px;
+    height: 0.5px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+  .section-rule::after {
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .section-rule span { color: var(--gold); font-size: 0.7rem; }
+
+  .menu-image-block {
+    margin-bottom: 3rem;
+  }
+
+  .menu-img-container {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(61,22,7,0.18), 0 1px 4px rgba(61,22,7,0.1);
+    border: 1px solid var(--parchment-dark);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: var(--parchment);
+  }
+  .menu-img-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 36px rgba(61,22,7,0.24), 0 2px 8px rgba(61,22,7,0.12);
+  }
+
+  .menu-img-container img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .img-caption {
+    padding: 0.6rem 1rem;
+    background: var(--parchment-dark);
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--terra);
+    text-align: center;
+  }
+
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(10,3,0,0.95);
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 100%;
+    max-height: 90svh;
+    object-fit: contain;
+    border: 1px solid rgba(200,146,42,0.3);
+    box-shadow: 0 0 60px rgba(200,146,42,0.15);
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(200,146,42,0.4);
+    color: var(--gold-pale);
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    z-index: 10000;
+  }
+
+  .footer {
+    background: linear-gradient(160deg, #3D1607, #6B2D0E);
+    color: var(--gold-pale);
+    text-align: center;
+    padding: 3rem 1.5rem 2.5rem;
+    position: relative;
+  }
+  .footer::before {
+    content: '';
+    display: block;
+    height: 8px;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    background: linear-gradient(90deg, var(--terra-deep), var(--gold), var(--terra-mid), var(--gold-light), var(--terra-deep));
+  }
+  
+  .bottom-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    margin: 1rem auto;
+    display: block;
+    box-shadow: 0 0 15px rgba(200,146,42,0.2);
+  }
+
+  .footer-mandala {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.2rem;
+    opacity: 0.6;
+  }
+  .footer-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.15em;
+    color: var(--gold-light);
+    margin-bottom: 0.3rem;
+  }
+  .footer-tagline {
+    font-style: italic;
+    font-size: 0.95rem;
+    opacity: 0.6;
+    margin-bottom: 1.5rem;
+  }
+  .footer-divider {
+    width: 60px;
+    height: 0.5px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 1rem auto;
+  }
+  .footer-info {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    opacity: 0.75;
+  }
+  .footer-info a { color: var(--gold-light); text-decoration: none; }
+
+  /* --- MOBILE OPTIMIZATIONS --- */
+  @media (max-width: 768px) {
+    .hero { padding: 4rem 1rem 5rem; }
+    .hero-title { font-size: clamp(2.5rem, 15vw, 4rem); }
+    .hero-pills { gap: 0.5rem; padding: 0 10px; }
+    .hero-pill { font-size: 0.65rem; padding: 0.4em 0.8em; }
+    
+    .sticky-nav { padding: 0 0.5rem; }
+    .nav-btn { padding: 0.8rem 0.9rem; font-size: 0.6rem; }
+    
+    .menu-section { padding: 2.5rem 1rem 1rem; }
+    .menu-image-block { margin-bottom: 2rem; }
+    
+    .lightbox-close { 
+      top: 15px; 
+      right: 15px; 
+      width: 44px; 
+      height: 44px; 
+      background: rgba(10,3,0,0.8);
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-border"></div>
+
+  <div class="corner tl"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2 L2 18 M2 2 L18 2" stroke="#C8922A" stroke-width="1.5" stroke-linecap="round"/><path d="M2 2 L14 14" stroke="#C8922A" stroke-width="0.5" opacity="0.5"/><circle cx="2" cy="2" r="2" fill="#C8922A" opacity="0.7"/><circle cx="14" cy="14" r="1.5" fill="#C8922A" opacity="0.4"/></svg></div>
+  <div class="corner tr"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2 L2 18 M2 2 L18 2" stroke="#C8922A" stroke-width="1.5" stroke-linecap="round"/><path d="M2 2 L14 14" stroke="#C8922A" stroke-width="0.5" opacity="0.5"/><circle cx="2" cy="2" r="2" fill="#C8922A" opacity="0.7"/><circle cx="14" cy="14" r="1.5" fill="#C8922A" opacity="0.4"/></svg></div>
+  <div class="corner bl"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2 L2 18 M2 2 L18 2" stroke="#C8922A" stroke-width="1.5" stroke-linecap="round"/><path d="M2 2 L14 14" stroke="#C8922A" stroke-width="0.5" opacity="0.5"/><circle cx="2" cy="2" r="2" fill="#C8922A" opacity="0.7"/><circle cx="14" cy="14" r="1.5" fill="#C8922A" opacity="0.4"/></svg></div>
+  <div class="corner br"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2 L2 18 M2 2 L18 2" stroke="#C8922A" stroke-width="1.5" stroke-linecap="round"/><path d="M2 2 L14 14" stroke="#C8922A" stroke-width="0.5" opacity="0.5"/><circle cx="2" cy="2" r="2" fill="#C8922A" opacity="0.7"/><circle cx="14" cy="14" r="1.5" fill="#C8922A" opacity="0.4"/></svg></div>
+
+  <svg class="hero-mandala" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="92" fill="none" stroke="#C8922A" stroke-width="0.5" opacity="0.3"/>
+    <circle cx="100" cy="100" r="75" fill="none" stroke="#C8922A" stroke-width="0.5" opacity="0.4"/>
+    <circle cx="100" cy="100" r="55" fill="none" stroke="#E8B84B" stroke-width="0.5" opacity="0.5"/>
+    <circle cx="100" cy="100" r="35" fill="none" stroke="#E8B84B" stroke-width="0.8" opacity="0.6"/>
+    <circle cx="100" cy="100" r="15" fill="#C8922A" opacity="0.4"/>
+    <circle cx="100" cy="100" r="6" fill="#E8B84B" opacity="0.8"/>
+    <g stroke="#C8922A" stroke-width="0.5" opacity="0.5">
+      <line x1="100" y1="8" x2="100" y2="192"/>
+      <line x1="8" y1="100" x2="192" y2="100"/>
+      <line x1="29" y1="29" x2="171" y2="171"/>
+      <line x1="171" y1="29" x2="29" y2="171"/>
+      <line x1="100" y1="8" x2="100" y2="192" transform="rotate(22.5,100,100)"/>
+      <line x1="100" y1="8" x2="100" y2="192" transform="rotate(45,100,100)"/>
+      <line x1="100" y1="8" x2="100" y2="192" transform="rotate(67.5,100,100)"/>
+      <line x1="100" y1="8" x2="100" y2="192" transform="rotate(112.5,100,100)"/>
+      <line x1="100" y1="8" x2="100" y2="192" transform="rotate(135,100,100)"/>
+      <line x1="100" y1="8" x2="100" y2="192" transform="rotate(157.5,100,100)"/>
+    </g>
+    <g fill="#E8B84B" opacity="0.6">
+      <polygon points="100,30 104,40 100,38 96,40" transform="rotate(0,100,100)"/>
+      <polygon points="100,30 104,40 100,38 96,40" transform="rotate(45,100,100)"/>
+      <polygon points="100,30 104,40 100,38 96,40" transform="rotate(90,100,100)"/>
+      <polygon points="100,30 104,40 100,38 96,40" transform="rotate(135,100,100)"/>
+      <polygon points="100,30 104,40 100,38 96,40" transform="rotate(180,100,100)"/>
+      <polygon points="100,30 104,40 100,38 96,40" transform="rotate(225,100,100)"/>
+      <polygon points="100,30 104,40 100,38 96,40" transform="rotate(270,100,100)"/>
+      <polygon points="100,30 104,40 100,38 96,40" transform="rotate(315,100,100)"/>
+    </g>
+    <g fill="none" stroke="#C8922A" stroke-width="0.8" opacity="0.5">
+      <ellipse cx="100" cy="64" rx="5" ry="10" transform="rotate(0,100,100)"/>
+      <ellipse cx="100" cy="64" rx="5" ry="10" transform="rotate(45,100,100)"/>
+      <ellipse cx="100" cy="64" rx="5" ry="10" transform="rotate(90,100,100)"/>
+      <ellipse cx="100" cy="64" rx="5" ry="10" transform="rotate(135,100,100)"/>
+      <ellipse cx="100" cy="64" rx="5" ry="10" transform="rotate(180,100,100)"/>
+      <ellipse cx="100" cy="64" rx="5" ry="10" transform="rotate(225,100,100)"/>
+      <ellipse cx="100" cy="64" rx="5" ry="10" transform="rotate(270,100,100)"/>
+      <ellipse cx="100" cy="64" rx="5" ry="10" transform="rotate(315,100,100)"/>
+    </g>
+  </svg>
+
+  <div class="hero-title">MAATI</div>
+  <div class="hero-devanagari">माटी</div>
+  <div style="font-family:'Cinzel',serif; font-size:clamp(0.9rem,3vw,1.2rem); letter-spacing:0.35em; color:var(--gold); opacity:0.8; margin-bottom:1rem; position:relative; z-index:10;">— BISTRO —</div>
+
+  <div class="hero-divider"><span>✦</span></div>
+
+  <div class="hero-tagline">From Our Soul — To Your Heart</div>
+
+  <div class="hero-pills">
+    <div class="hero-pill">Artisanal Coffee</div>
+    <div class="hero-pill">Fusion Cuisine</div>
+    <div class="hero-pill">Craft Cocktails</div>
+    <div class="hero-pill">Sustainable Sourcing</div>
+  </div>
+
+  <button class="view-menu-btn" onclick="scrollToSection(event, 'menu')">
+    VIEW MENU
+  </button>
+
+  <div class="scroll-cta" onclick="scrollToSection(event, 'menu')">
+    <span>Scroll</span>
+    <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M9 3v12M4 10l5 5 5-5"/>
+    </svg>
+  </div>
+</section>
+
+<div class="menu-wrap" id="menu">
+
+  <nav class="sticky-nav">
+    <div class="nav-inner">
+      <button class="nav-btn active" onclick="scrollToSection(event, 'page-1')">Page 1 (Cover)</button>
+      <button class="nav-btn" onclick="scrollToSection(event, 'page-2')">Page 2 (Breakfast)</button>
+      <button class="nav-btn" onclick="scrollToSection(event, 'page-3')">Page 3 (Cold Bev)</button>
+      <button class="nav-btn" onclick="scrollToSection(event, 'page-4')">Page 4 (Snacks)</button>
+      <button class="nav-btn" onclick="scrollToSection(event, 'page-5')">Page 5 (Momos)</button>
+      <button class="nav-btn" onclick="scrollToSection(event, 'page-6')">Page 6 (Pizza)</button>
+      <button class="nav-btn" onclick="scrollToSection(event, 'page-7')">Page 7 (Thank You)</button>
+    </div>
+  </nav>
+
+  <section id="page-1" class="menu-section">
+    <div class="section-header">
+      <div class="section-ornament">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="0.8" opacity="0.4"/><circle cx="24" cy="24" r="12" stroke="currentColor" stroke-width="0.8" opacity="0.6"/><circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.5"/><line x1="24" y1="4" x2="24" y2="44" stroke="currentColor" stroke-width="0.5" opacity="0.3"/><line x1="4" y1="24" x2="44" y2="24" stroke="currentColor" stroke-width="0.5" opacity="0.3"/></svg>
+      </div>
+      <div class="section-title">Menu Cover</div>
+      <div class="section-rule"><span>✦</span></div>
+    </div>
+    <div class="menu-image-block" id="img-page-1">
+      <div class="menu-img-container" onclick="openLightbox('img-page-1')">
+        <img src="1.png" alt="Page 1" style="width: 100%; display: block; object-fit: cover;">
+        <div class="img-caption">PAGE 1 — TAP TO ENLARGE</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page-2" class="menu-section" style="padding-top:1rem;">
+    <div class="section-header">
+      <div class="section-ornament">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="0.8" opacity="0.4"/><circle cx="24" cy="24" r="12" stroke="currentColor" stroke-width="0.8" opacity="0.6"/><circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.5"/><line x1="24" y1="4" x2="24" y2="44" stroke="currentColor" stroke-width="0.5" opacity="0.3"/><line x1="4" y1="24" x2="44" y2="24" stroke="currentColor" stroke-width="0.5" opacity="0.3"/></svg>
+      </div>
+      <div class="section-title">Breakfast & Hot Beverages</div>
+      <div class="section-rule"><span>✦</span></div>
+    </div>
+    <div class="menu-image-block" id="img-page-2">
+      <div class="menu-img-container" onclick="openLightbox('img-page-2')">
+        <img src="2.png" alt="Page 2" style="width: 100%; display: block; object-fit: cover;">
+        <div class="img-caption">PAGE 2 — TAP TO ENLARGE</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page-3" class="menu-section" style="padding-top:1rem;">
+    <div class="section-header">
+      <div class="section-ornament">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="0.8" opacity="0.4"/><circle cx="24" cy="24" r="12" stroke="currentColor" stroke-width="0.8" opacity="0.6"/><circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.5"/><line x1="24" y1="4" x2="24" y2="44" stroke="currentColor" stroke-width="0.5" opacity="0.3"/><line x1="4" y1="24" x2="44" y2="24" stroke="currentColor" stroke-width="0.5" opacity="0.3"/></svg>
+      </div>
+      <div class="section-title">Cold Beverages & Sodas</div>
+      <div class="section-rule"><span>✦</span></div>
+    </div>
+    <div class="menu-image-block" id="img-page-3">
+      <div class="menu-img-container" onclick="openLightbox('img-page-3')">
+        <img src="3.png" alt="Page 3" style="width: 100%; display: block; object-fit: cover;">
+        <div class="img-caption">PAGE 3 — TAP TO ENLARGE</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page-4" class="menu-section" style="padding-top:1rem;">
+    <div class="section-header">
+      <div class="section-ornament">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="0.8" opacity="0.4"/><circle cx="24" cy="24" r="12" stroke="currentColor" stroke-width="0.8" opacity="0.6"/><circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.5"/><line x1="24" y1="4" x2="24" y2="44" stroke="currentColor" stroke-width="0.5" opacity="0.3"/><line x1="4" y1="24" x2="44" y2="24" stroke="currentColor" stroke-width="0.5" opacity="0.3"/></svg>
+      </div>
+      <div class="section-title">Snacks & Burgers</div>
+      <div class="section-rule"><span>✦</span></div>
+    </div>
+    <div class="menu-image-block" id="img-page-4">
+      <div class="menu-img-container" onclick="openLightbox('img-page-4')">
+        <img src="4.png" alt="Page 4" style="width: 100%; display: block; object-fit: cover;">
+        <div class="img-caption">PAGE 4 — TAP TO ENLARGE</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page-5" class="menu-section" style="padding-top:1rem;">
+    <div class="section-header">
+      <div class="section-ornament">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="0.8" opacity="0.4"/><circle cx="24" cy="24" r="12" stroke="currentColor" stroke-width="0.8" opacity="0.6"/><circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.5"/><line x1="24" y1="4" x2="24" y2="44" stroke="currentColor" stroke-width="0.5" opacity="0.3"/><line x1="4" y1="24" x2="44" y2="24" stroke="currentColor" stroke-width="0.5" opacity="0.3"/></svg>
+      </div>
+      <div class="section-title">Momos & Sandwiches</div>
+      <div class="section-rule"><span>✦</span></div>
+    </div>
+    <div class="menu-image-block" id="img-page-5">
+      <div class="menu-img-container" onclick="openLightbox('img-page-5')">
+        <img src="5.png" alt="Page 5" style="width: 100%; display: block; object-fit: cover;">
+        <div class="img-caption">PAGE 5 — TAP TO ENLARGE</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page-6" class="menu-section" style="padding-top:1rem;">
+    <div class="section-header">
+      <div class="section-ornament">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="0.8" opacity="0.4"/><circle cx="24" cy="24" r="12" stroke="currentColor" stroke-width="0.8" opacity="0.6"/><circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.5"/><line x1="24" y1="4" x2="24" y2="44" stroke="currentColor" stroke-width="0.5" opacity="0.3"/><line x1="4" y1="24" x2="44" y2="24" stroke="currentColor" stroke-width="0.5" opacity="0.3"/></svg>
+      </div>
+      <div class="section-title">Pizza, Pasta & Maggi</div>
+      <div class="section-rule"><span>✦</span></div>
+    </div>
+    <div class="menu-image-block" id="img-page-6">
+      <div class="menu-img-container" onclick="openLightbox('img-page-6')">
+        <img src="6.png" alt="Page 6" style="width: 100%; display: block; object-fit: cover;">
+        <div class="img-caption">PAGE 6 — TAP TO ENLARGE</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="page-7" class="menu-section" style="padding-top:1rem; padding-bottom:3rem;">
+    <div class="section-header">
+      <div class="section-ornament">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="0.8" opacity="0.4"/><circle cx="24" cy="24" r="12" stroke="currentColor" stroke-width="0.8" opacity="0.6"/><circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.5"/><line x1="24" y1="4" x2="24" y2="44" stroke="currentColor" stroke-width="0.5" opacity="0.3"/><line x1="4" y1="24" x2="44" y2="24" stroke="currentColor" stroke-width="0.5" opacity="0.3"/></svg>
+      </div>
+      <div class="section-title">Thank You</div>
+      <div class="section-rule"><span>✦</span></div>
+    </div>
+    <div class="menu-image-block" id="img-page-7">
+      <div class="menu-img-container" onclick="openLightbox('img-page-7')">
+        <img src="7.png" alt="Page 7" style="width: 100%; display: block; object-fit: cover;">
+        <div class="img-caption">PAGE 7 — TAP TO ENLARGE</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <svg class="footer-mandala" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="32" cy="32" r="28" fill="none" stroke="#C8922A" stroke-width="0.5"/>
+    <circle cx="32" cy="32" r="18" fill="none" stroke="#C8922A" stroke-width="0.5"/>
+    <circle cx="32" cy="32" r="8" fill="none" stroke="#E8B84B" stroke-width="0.8"/>
+    <circle cx="32" cy="32" r="3" fill="#E8B84B" opacity="0.7"/>
+    <g stroke="#C8922A" stroke-width="0.4" opacity="0.5">
+      <line x1="32" y1="4" x2="32" y2="60"/>
+      <line x1="4" y1="32" x2="60" y2="32"/>
+      <line x1="12" y1="12" x2="52" y2="52"/>
+      <line x1="52" y1="12" x2="12" y2="52"/>
+    </g>
+  </svg>
+
+  <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=300&q=80" alt="Bistro Vibe Bottom" class="bottom-image">
+
+  <div class="footer-name">MAATI BISTRO</div>
+  <div class="footer-tagline">From Our Soul — To Your Heart</div>
+  <div class="footer-divider"></div>
+  <div class="footer-info">
+    2VQ4+74Q Maati Bistro, Vasantdadanagar<br>
+    Adgaon, Nashik, Maharashtra 422003<br>
+    <br>
+    <a href="tel:+918855045587">+91 88550 45587</a><br>
+    <a href="https://www.instagram.com/maati_bistro" target="_blank">@maati_bistro</a>
+  </div>
+  <div style="margin-top:2rem; font-size:0.7rem; letter-spacing:0.1em; opacity:0.35; font-family:'Cinzel',serif;">
+    ✦ ARTISANAL COFFEE · FUSION CUISINE · CRAFT COCKTAILS ✦
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  function scrollToSection(evt, id) {
+    if (evt) evt.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      const navHeight = document.querySelector('.sticky-nav').offsetHeight || 50;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navHeight - 15;
+  
+      window.scrollTo({
+           top: offsetPosition,
+           behavior: "smooth"
+      });
+    }
+  }
+
+  function openLightbox(sectionId) {
+    const container = document.querySelector('#' + sectionId + ' .menu-img-container');
+    const img = container.querySelector('img');
+    if (!img) return;
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+
+  const sections = ['page-1','page-2','page-3','page-4','page-5','page-6','page-7'];
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = sections.indexOf(e.target.id);
+        if (idx > -1) {
+          navBtns.forEach(b => b.classList.remove('active'));
+          if (navBtns[idx]) {
+            navBtns[idx].classList.add('active');
+            navBtns[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        }
+      }
+    });
+  }, { threshold: 0.3, rootMargin: "-100px 0px -40% 0px" });
+  
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
